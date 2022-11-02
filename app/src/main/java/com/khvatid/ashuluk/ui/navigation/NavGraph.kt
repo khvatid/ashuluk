@@ -12,6 +12,7 @@ import com.khvatid.ashuluk.ui.screens.login.LoginScreen
 import com.khvatid.ashuluk.ui.screens.main.MainScreen
 import com.khvatid.ashuluk.ui.screens.register.RegisterScreen
 import com.khvatid.ashuluk.ui.screens.settings.SettingsScreen
+import com.khvatid.ashuluk.ui.screens.task.TaskScreen
 
 fun NavGraphBuilder.ashulukNavGraph(appState: AppState) {
     navigation(
@@ -70,5 +71,8 @@ private fun NavGraphBuilder.mainGraph(appState: AppState) {
         )
     }
 
+    composable(route = UiRoutes.TASK){
+        TaskScreen()
+    }
 
 }

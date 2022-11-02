@@ -8,4 +8,5 @@ object UiRoutes {
     const val MAIN = "main_screen"
     const val SETTINGS = "settings_screen"
     const val KANBAN = "kanban_screen"
+    const val TASK = "task_screen"
 }

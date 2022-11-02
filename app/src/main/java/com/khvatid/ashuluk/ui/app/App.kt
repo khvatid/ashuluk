@@ -15,6 +15,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.khvatid.ashuluk.ui.common.components.AshulukBottomBar
+import com.khvatid.ashuluk.ui.common.components.AshulukFAB
 import com.khvatid.ashuluk.ui.common.components.AshulukTopBar
 import com.khvatid.ashuluk.ui.common.snackbar.SnackbarManager
 import com.khvatid.ashuluk.ui.navigation.ashulukNavGraph
@@ -53,6 +54,10 @@ fun App(viewModel: AppViewModel) {
                     }
                 )
             },
+            floatingActionButton = {
+                AshulukFAB(appState = appState)
+            },
+            floatingActionButtonPosition = FabPosition.End,
             content = { innerPadding ->
                 NavHost(
                     navController = appState.navController,

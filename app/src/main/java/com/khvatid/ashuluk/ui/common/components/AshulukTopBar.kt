@@ -1,16 +1,13 @@
 package com.khvatid.ashuluk.ui.common.components
 
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModelStoreOwner
 import com.khvatid.ashuluk.ui.navigation.UiRoutes
@@ -20,19 +17,22 @@ import com.khvatid.ashuluk.ui.screens.kanban.KanbanViewModel
 fun AshulukTopBar(owner: ViewModelStoreOwner, route: String?, popBack: () -> Unit) =
     when (route) {
         UiRoutes.REGISTER -> {
-            BackTopBar(popBack)
+            BackTopBar(popBack = popBack)
         }
         UiRoutes.LOGIN -> {
-            BackTopBar(popBack)
+            BackTopBar(popBack = popBack)
         }
         UiRoutes.KANBAN -> {
             KanbanTopBar(hiltViewModel(owner))
+        }
+        UiRoutes.TASK -> {
+            BackTopBar(text = "Task", popBack = popBack)
         }
         else -> {}
     }
 
 @Composable
-private fun BackTopBar(popBack: () -> Unit) {
+private fun BackTopBar(text: String = "Go Back", popBack: () -> Unit) {
     TopAppBar(
         navigationIcon = {
             IconButton(onClick = popBack) {
@@ -42,12 +42,27 @@ private fun BackTopBar(popBack: () -> Unit) {
                 )
             }
         },
-        title = { Text(text = "Go Back") }
+        title = { Text(text = text) }
     )
 }
 
 @Composable
 private fun KanbanTopBar(viewModel: KanbanViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState
-
+    TabRow(selectedTabIndex = uiState.selectedTab,
+        tabs = {
+            uiState.tabs.forEachIndexed { index, title ->
+                Tab(
+                    selected = uiState.selectedTab == index,
+                    onClick = { viewModel.onChangeSelectTab(index) },
+                    text = {
+                        Text(
+                            text = title,
+                            modifier = Modifier.padding(10.dp)
+                        )
+                    }
+                )
+            }
+        }
+    )
 }
