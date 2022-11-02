@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ashuluk</string>
+    <string name="error_message">Error, please try again</string>
+
+    <string name="kanban_screen">Kanban</string>
+    <string name="settings_screen">Settings</string>
+    <string name="main_screen">Main</string>
+</resources>
