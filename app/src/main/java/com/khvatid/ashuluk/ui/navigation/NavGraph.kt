@@ -1,9 +1,13 @@
 package com.khvatid.ashuluk.ui.navigation
 
+import android.app.Activity
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavGraphBuilder
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.*
 import androidx.navigation.compose.composable
-import androidx.navigation.navigation
+import com.khvatid.ashuluk.AshulukActivity
 import com.khvatid.ashuluk.domain.util.ParentDestination
 import com.khvatid.ashuluk.ui.app.AppState
 import com.khvatid.ashuluk.ui.screens.authenticate.AuthenticateScreen
@@ -13,6 +17,8 @@ import com.khvatid.ashuluk.ui.screens.main.MainScreen
 import com.khvatid.ashuluk.ui.screens.register.RegisterScreen
 import com.khvatid.ashuluk.ui.screens.settings.SettingsScreen
 import com.khvatid.ashuluk.ui.screens.task.TaskScreen
+import com.khvatid.ashuluk.ui.screens.task.TaskViewModel
+import dagger.hilt.android.EntryPointAccessors
 
 fun NavGraphBuilder.ashulukNavGraph(appState: AppState) {
     navigation(
@@ -61,7 +67,10 @@ private fun NavGraphBuilder.mainGraph(appState: AppState) {
 
     composable(route = UiRoutes.KANBAN) {
         KanbanScreen(
-            viewModel = hiltViewModel(appState.viewModelStoreOwner)
+            viewModel = hiltViewModel(appState.viewModelStoreOwner),
+            openTask = {
+                navigateToTask(appState.navController, it)
+            }
         )
     }
 
@@ -71,8 +80,35 @@ private fun NavGraphBuilder.mainGraph(appState: AppState) {
         )
     }
 
-    composable(route = UiRoutes.TASK){
-        TaskScreen()
+    composable(
+        route = "${UiRoutes.TASK}/{taskId}",
+        arguments = listOf(
+            navArgument("taskId") {
+                type = NavType.StringType
+            }
+        )
+    ) {
+        TaskScreen(
+            taskViewModel(
+                taskId = it.arguments?.getString("taskId")!!,
+            )
+        )
     }
 
+}
+
+@Composable
+private fun taskViewModel(taskId: String): TaskViewModel {
+    val factory = EntryPointAccessors.fromActivity(
+        LocalContext.current as Activity,
+        AshulukActivity.ViewModelFactoryProvider::class.java
+    ).taskViewModelFactory()
+
+    return viewModel(
+        factory = TaskViewModel.provideFactory(factory, taskId),
+    )
+}
+
+private fun navigateToTask(navController: NavController, taskId: String) {
+    navController.navigate("${UiRoutes.TASK}/$taskId")
 }

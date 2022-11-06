@@ -25,7 +25,7 @@ fun AshulukTopBar(owner: ViewModelStoreOwner, route: String?, popBack: () -> Uni
         UiRoutes.KANBAN -> {
             KanbanTopBar(hiltViewModel(owner))
         }
-        UiRoutes.TASK -> {
+        UiRoutes.TASK_EDIT -> {
             BackTopBar(text = "Task", popBack = popBack)
         }
         else -> {}

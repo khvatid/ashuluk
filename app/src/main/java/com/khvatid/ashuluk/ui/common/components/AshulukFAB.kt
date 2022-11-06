@@ -13,7 +13,7 @@ fun AshulukFAB(appState: AppState) {
     when (appState.currentRoute) {
         UiRoutes.KANBAN -> {
             FloatingActionButton(
-                onClick = { appState.navigate(UiRoutes.TASK) },
+                onClick = { appState.navigate(UiRoutes.TASK_EDIT) },
                 content = { Icon(imageVector = Icons.Default.Add, contentDescription = "Add") }
             )
 
