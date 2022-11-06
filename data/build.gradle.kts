@@ -43,6 +43,7 @@ dependencies {
 
     //Firebase
     implementation(DataDependencies.FireBase.authenticate)
+    implementation(DataDependencies.FireBase.firestore)
 
     //Room
     kapt(DataDependencies.Room.compiler)

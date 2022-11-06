@@ -1,10 +1,14 @@
 package com.khvatid.ashuluk.di
 
 import android.content.Context
+import com.khvatid.ashuluk.data.repositories.KanbanRepositoryImp
 import com.khvatid.ashuluk.data.repositories.LaunchEntityRepositoryImp
 import com.khvatid.ashuluk.data.service.AccountServiceImp
+import com.khvatid.ashuluk.data.storage.KanbanStorage
 import com.khvatid.ashuluk.data.storage.LaunchModelStorage
+import com.khvatid.ashuluk.data.storage.firestore.KanbanStorageFirestore
 import com.khvatid.ashuluk.data.storage.pref.LaunchModelStoragePref
+import com.khvatid.ashuluk.domain.repository.KanbanRepository
 import com.khvatid.ashuluk.domain.repository.LaunchEntityRepository
 import com.khvatid.ashuluk.domain.service.AccountService
 import dagger.Module
@@ -32,8 +36,20 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideAccountService():AccountService{
+    fun provideAccountService(): AccountService {
         return AccountServiceImp()
+    }
+
+    @Provides
+    @Singleton
+    fun provideKanbanStorage(): KanbanStorage {
+        return KanbanStorageFirestore()
+    }
+
+    @Provides
+    @Singleton
+    fun provideKanbanRepository(storage: KanbanStorage): KanbanRepository {
+        return KanbanRepositoryImp(storage = storage)
     }
 
 }
