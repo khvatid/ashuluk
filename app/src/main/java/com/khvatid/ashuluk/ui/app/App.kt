@@ -2,7 +2,7 @@ package com.khvatid.ashuluk.ui.app
 
 import android.content.res.Resources
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -22,11 +22,12 @@ import com.khvatid.ashuluk.ui.navigation.ashulukNavGraph
 import com.khvatid.ashuluk.ui.theme.AshulukTheme
 import kotlinx.coroutines.CoroutineScope
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun App(viewModel: AppViewModel) {
     AshulukTheme {
         val appState = rememberAppState()
-        Scaffold(scaffoldState = appState.scaffoldState,
+        Scaffold(
             topBar = {
                 AshulukTopBar(
                     owner = appState.viewModelStoreOwner,
@@ -44,12 +45,12 @@ fun App(viewModel: AppViewModel) {
             },
             snackbarHost = {
                 SnackbarHost(
-                    hostState = it,
+                    hostState = appState.snackbarHostState,
                     modifier = Modifier.padding(8.dp),
                     snackbar = { snackbarData ->
                         Snackbar(
                             snackbarData = snackbarData,
-                            contentColor = MaterialTheme.colors.onPrimary
+                            contentColor = MaterialTheme.colorScheme.onPrimary
                         )
                     }
                 )
@@ -76,7 +77,9 @@ fun rememberAppState(
     navController: NavHostController = rememberNavController(),
     snackbarManager: SnackbarManager = SnackbarManager,
     resources: Resources = LocalContext.current.resources,
-    scaffoldState: ScaffoldState = rememberScaffoldState(),
+    snackbarState: SnackbarHostState = remember {
+        SnackbarHostState()
+    },
     viewModelStoreOwner: ViewModelStoreOwner? = LocalViewModelStoreOwner.current,
     coroutineScope: CoroutineScope = rememberCoroutineScope()
 ) = remember {
@@ -85,7 +88,7 @@ fun rememberAppState(
         viewModelStoreOwner = viewModelStoreOwner!!,
         snackbarManager = snackbarManager,
         resources = resources,
-        scaffoldState = scaffoldState,
+        snackbarHostState = snackbarState,
         coroutineScope = coroutineScope
     )
 }

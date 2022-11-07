@@ -2,12 +2,12 @@ package com.khvatid.ashuluk.ui.screens.settings
 
 import androidx.lifecycle.ViewModel
 import com.khvatid.ashuluk.domain.entities.LaunchEntity
-import com.khvatid.ashuluk.domain.usecase.DeleteAccountUseCase
-import com.khvatid.ashuluk.domain.usecase.SetLaunchEntityUseCase
-import com.khvatid.ashuluk.domain.usecase.SignOutUseCase
+import com.khvatid.ashuluk.domain.usecase.service.DeleteAccountUseCase
+import com.khvatid.ashuluk.domain.usecase.repository.launch.SetLaunchEntityUseCase
+import com.khvatid.ashuluk.domain.usecase.service.SignOutUseCase
 import com.khvatid.ashuluk.domain.util.ParentDestination
 import com.khvatid.ashuluk.ui.common.snackbar.SnackbarManager
-import com.khvatid.ashuluk.ui.common.snackbar.SnackbarMessage.Companion.toSnackBarMessage
+import com.khvatid.ashuluk.ui.common.snackbar.SnackbarMessage.Companion.snackbarMessage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -29,7 +29,7 @@ class SettingsViewModel @Inject constructor(
                 )
                 clearAndNavigate(ParentDestination.AUTH)
             } else {
-                SnackbarManager.showMessage(it.toSnackBarMessage())
+                SnackbarManager.showMessage(it.snackbarMessage())
             }
         }
     }

@@ -10,12 +10,6 @@ import com.khvatid.ashuluk.ui.common.components.ListButton
 fun KanbanScreen(viewModel: KanbanViewModel = hiltViewModel(), openTask: (String) -> Unit) {
     val uiState by viewModel.uiState
     LazyColumn() {
-        uiState.tasks.forEach {
-            item {
-                ListButton(text = it) {
-                    openTask(it)
-                }
-            }
-        }
+
     }
 }

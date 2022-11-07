@@ -1,10 +1,10 @@
 package com.khvatid.ashuluk.ui.common.components
 
 import androidx.annotation.StringRes
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.List
@@ -60,9 +60,9 @@ fun AshulukBottomBar(
     onClick: (String) -> Unit
 ) {
     if (showBottomBar) {
-        BottomNavigation {
+        NavigationBar {
             tabs.forEach {
-                BottomNavigationItem(
+                NavigationBarItem(
                     selected = it.route == route,
                     onClick = { onClick(it.route) },
                     label = {

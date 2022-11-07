@@ -4,11 +4,11 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.khvatid.ashuluk.domain.entities.LaunchEntity
-import com.khvatid.ashuluk.domain.usecase.CreateAccountToEmailAndPasswordUseCase
-import com.khvatid.ashuluk.domain.usecase.SetLaunchEntityUseCase
+import com.khvatid.ashuluk.domain.usecase.service.CreateAccountToEmailAndPasswordUseCase
+import com.khvatid.ashuluk.domain.usecase.repository.launch.SetLaunchEntityUseCase
 import com.khvatid.ashuluk.domain.util.ParentDestination
 import com.khvatid.ashuluk.ui.common.snackbar.SnackbarManager
-import com.khvatid.ashuluk.ui.common.snackbar.SnackbarMessage.Companion.toSnackBarMessage
+import com.khvatid.ashuluk.ui.common.snackbar.SnackbarMessage.Companion.snackbarMessage
 import com.khvatid.ashuluk.ui.navigation.UiRoutes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -50,7 +50,7 @@ class RegisterViewModel
                 )
                 openSingleTop(UiRoutes.MAIN)
             } else {
-                SnackbarManager.showMessage(error.toSnackBarMessage())
+                SnackbarManager.showMessage(error.snackbarMessage())
             }
         }
     }

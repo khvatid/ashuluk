@@ -1,7 +1,6 @@
 package com.khvatid.ashuluk.ui.app
 
 import android.content.res.Resources
-import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.lifecycle.ViewModelStoreOwner
@@ -20,7 +19,7 @@ import kotlinx.coroutines.launch
 @Stable
 class AppState(
     val navController: NavHostController,
-    val scaffoldState: ScaffoldState,
+    val snackbarHostState: androidx.compose.material3.SnackbarHostState,
     val viewModelStoreOwner: ViewModelStoreOwner,
     private val snackbarManager: SnackbarManager,
     private val resources: Resources,
@@ -30,7 +29,7 @@ class AppState(
         coroutineScope.launch {
             snackbarManager.messages.filterNotNull().collect {
                 val text = it.toMessage(resources = resources)
-                scaffoldState.snackbarHostState.showSnackbar(text)
+                snackbarHostState.showSnackbar(text)
             }
         }
     }

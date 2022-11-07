@@ -1,7 +1,7 @@
 package com.khvatid.ashuluk.ui.common.components
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
@@ -31,6 +31,7 @@ fun AshulukTopBar(owner: ViewModelStoreOwner, route: String?, popBack: () -> Uni
         else -> {}
     }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun BackTopBar(text: String = "Go Back", popBack: () -> Unit) {
     TopAppBar(

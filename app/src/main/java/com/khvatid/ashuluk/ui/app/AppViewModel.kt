@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.khvatid.ashuluk.domain.usecase.GetLaunchEntityUseCase
+import com.khvatid.ashuluk.domain.usecase.repository.launch.GetLaunchEntityUseCase
 import com.khvatid.ashuluk.domain.util.ParentDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

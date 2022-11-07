@@ -16,7 +16,7 @@ sealed class SnackbarMessage{
             }
         }
 
-        fun Throwable.toSnackBarMessage(): SnackbarMessage {
+        fun Throwable.snackbarMessage(): SnackbarMessage {
             val message = this.message.orEmpty()
             return if (message.isNotBlank()) StringSnackbar(message)
             else ResourceSnackbar(AppText.error_message)
