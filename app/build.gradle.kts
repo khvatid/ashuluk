@@ -68,7 +68,8 @@ dependencies {
 
     //Compose
     implementation(AppDependencies.Compose.ui)
-    implementation(AppDependencies.Compose.material)
+
+    implementation(AppDependencies.Compose.material3)
     implementation(AppDependencies.Compose.tooling)
     debugImplementation(AppDependencies.Compose.toolingTest)
     debugImplementation(AppDependencies.Compose.uiTestManifest)
