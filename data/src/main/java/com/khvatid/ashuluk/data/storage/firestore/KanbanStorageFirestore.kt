@@ -12,7 +12,7 @@ class KanbanStorageFirestore : KanbanStorage {
 
     private var listenerRegistration: ListenerRegistration? = null
 
-    override fun addListener(
+    override suspend fun addListener(
         userId: String,
         onDocumentEvent: (Boolean, TaskModel) -> Unit,
         onError: (Throwable) -> Unit
@@ -36,11 +36,11 @@ class KanbanStorageFirestore : KanbanStorage {
 
     }
 
-    override fun removeListener() {
+    override suspend fun removeListener() {
         listenerRegistration?.remove()
     }
 
-    override fun getTask(
+    override suspend fun getTask(
         taskId: String,
         onError: (Throwable) -> Unit,
         onSuccess: (TaskModel) -> Unit
@@ -53,14 +53,14 @@ class KanbanStorageFirestore : KanbanStorage {
             }
     }
 
-    override fun saveTask(task: TaskModel, onResult: (Throwable?) -> Unit) {
+    override suspend fun saveTask(task: TaskModel, onResult: (Throwable?) -> Unit) {
         Firebase.firestore
             .collection(TASK_COLLECTION)
             .add(task)
             .addOnCompleteListener { onResult(it.exception) }
     }
 
-    override fun updateTask(task: TaskModel, onResult: (Throwable?) -> Unit) {
+    override suspend fun updateTask(task: TaskModel, onResult: (Throwable?) -> Unit) {
         Firebase.firestore
             .collection(TASK_COLLECTION)
             .document(task.id)
@@ -68,7 +68,7 @@ class KanbanStorageFirestore : KanbanStorage {
             .addOnCompleteListener { onResult(it.exception) }
     }
 
-    override fun deleteTask(task: TaskModel, onResult: (Throwable?) -> Unit) {
+    override suspend fun deleteTask(task: TaskModel, onResult: (Throwable?) -> Unit) {
         Firebase.firestore
             .collection(TASK_COLLECTION)
             .document(task.id)
@@ -76,7 +76,7 @@ class KanbanStorageFirestore : KanbanStorage {
             .addOnCompleteListener { onResult(it.exception) }
     }
 
-    override fun deleteAllTasks(userId: String, onResult: (Throwable?) -> Unit) {
+    override suspend fun deleteAllTasks(userId: String, onResult: (Throwable?) -> Unit) {
         TODO("Not yet implemented")
     }
 

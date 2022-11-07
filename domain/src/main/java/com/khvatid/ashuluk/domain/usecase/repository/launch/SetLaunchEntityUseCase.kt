@@ -1,4 +1,4 @@
-package com.khvatid.ashuluk.domain.usecase
+package com.khvatid.ashuluk.domain.usecase.repository.launch
 
 import com.khvatid.ashuluk.domain.entities.LaunchEntity
 import com.khvatid.ashuluk.domain.repository.LaunchEntityRepository

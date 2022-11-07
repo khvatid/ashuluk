@@ -7,7 +7,7 @@ import com.khvatid.ashuluk.domain.entities.TaskStatus
 import com.khvatid.ashuluk.domain.repository.KanbanRepository
 
 class KanbanRepositoryImp(private val storage: KanbanStorage) : KanbanRepository {
-    override fun addListener(
+    override suspend fun addListener(
         userId: String,
         onDocumentEvent: (Boolean, TaskEntity) -> Unit,
         onError: (Throwable) -> Unit
@@ -24,11 +24,11 @@ class KanbanRepositoryImp(private val storage: KanbanStorage) : KanbanRepository
         )
     }
 
-    override fun removeListener() {
+    override suspend fun removeListener() {
         storage.removeListener()
     }
 
-    override fun getTask(
+    override suspend fun getTask(
         taskId: String,
         onError: (Throwable) -> Unit,
         onSuccess: (TaskEntity) -> Unit
@@ -40,19 +40,19 @@ class KanbanRepositoryImp(private val storage: KanbanStorage) : KanbanRepository
         )
     }
 
-    override fun saveTask(task: TaskEntity, onResult: (Throwable?) -> Unit) {
+    override suspend fun saveTask(task: TaskEntity, onResult: (Throwable?) -> Unit) {
         storage.saveTask(task = task.toTaskModel(), onResult = onResult)
     }
 
-    override fun updateTask(task: TaskEntity, onResult: (Throwable?) -> Unit) {
-        storage.updateTask(task = task.toTaskModel(), onResult = onResult)
+    override suspend fun updateTask(taskEntity: TaskEntity, onResult: (Throwable?) -> Unit) {
+        storage.updateTask(task = taskEntity.toTaskModel(), onResult = onResult)
     }
 
-    override fun deleteTask(task: TaskEntity, onResult: (Throwable?) -> Unit) {
-        storage.deleteTask(task = task.toTaskModel(), onResult = onResult)
+    override suspend fun deleteTask(taskEntity: TaskEntity, onResult: (Throwable?) -> Unit) {
+        storage.deleteTask(task = taskEntity.toTaskModel(), onResult = onResult)
     }
 
-    override fun deleteAllTasks(userId: String, onResult: (Throwable?) -> Unit) {
+    override suspend fun deleteAllTasks(userId: String, onResult: (Throwable?) -> Unit) {
         TODO("Not yet implemented")
     }
 

@@ -3,7 +3,10 @@ package com.khvatid.ashuluk.di
 import com.khvatid.ashuluk.domain.repository.KanbanRepository
 import com.khvatid.ashuluk.domain.repository.LaunchEntityRepository
 import com.khvatid.ashuluk.domain.service.AccountService
-import com.khvatid.ashuluk.domain.usecase.*
+import com.khvatid.ashuluk.domain.usecase.repository.kanban.*
+import com.khvatid.ashuluk.domain.usecase.repository.launch.GetLaunchEntityUseCase
+import com.khvatid.ashuluk.domain.usecase.repository.launch.SetLaunchEntityUseCase
+import com.khvatid.ashuluk.domain.usecase.service.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,6 +27,11 @@ class DomainModule {
     fun provideSetLaunchEntityUseCase(repository: LaunchEntityRepository)
             : SetLaunchEntityUseCase {
         return SetLaunchEntityUseCase(repository)
+    }
+
+    @Provides
+    fun provideGetUserIdUseCase(accountService: AccountService): GetUserIdUseCase {
+        return GetUserIdUseCase(accountService)
     }
 
     @Provides
@@ -50,6 +58,7 @@ class DomainModule {
         return SignOutUseCase(accountService)
     }
 
+
     @Provides
     fun provideAddTaskListenerUseCase(repository: KanbanRepository): AddTaskListenerUseCase {
         return AddTaskListenerUseCase(repository = repository)
@@ -65,5 +74,19 @@ class DomainModule {
         return SaveTaskUseCase(repository)
     }
 
+    @Provides
+    fun provideGetTaskUseCase(repository: KanbanRepository): GetTaskUseCase {
+        return GetTaskUseCase(repository)
+    }
+
+    @Provides
+    fun provideUpdateTaskUseCase(repository: KanbanRepository): UpdateTaskUseCase {
+        return UpdateTaskUseCase(repository)
+    }
+
+    @Provides
+    fun provideDeleteTaskUseCase(repository: KanbanRepository): DeleteTaskUseCase {
+        return DeleteTaskUseCase(repository)
+    }
 
 }

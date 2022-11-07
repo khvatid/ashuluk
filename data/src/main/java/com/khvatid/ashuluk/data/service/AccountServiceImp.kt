@@ -9,7 +9,7 @@ class AccountServiceImp : AccountService {
     private val auth = Firebase.auth
 
     override fun hasUser(): Boolean {
-        TODO("hasUser need imp")
+        return Firebase.auth.currentUser != null
     }
 
     override fun getUserId(): String {

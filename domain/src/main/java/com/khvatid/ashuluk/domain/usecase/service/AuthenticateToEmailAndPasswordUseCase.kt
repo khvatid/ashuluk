@@ -1,4 +1,4 @@
-package com.khvatid.ashuluk.domain.usecase
+package com.khvatid.ashuluk.domain.usecase.service
 
 import com.khvatid.ashuluk.domain.service.AccountService
 
