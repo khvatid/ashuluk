@@ -7,10 +7,12 @@ import com.khvatid.ashuluk.domain.usecase.repository.kanban.*
 import com.khvatid.ashuluk.domain.usecase.repository.launch.GetLaunchEntityUseCase
 import com.khvatid.ashuluk.domain.usecase.repository.launch.SetLaunchEntityUseCase
 import com.khvatid.ashuluk.domain.usecase.service.*
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.components.SingletonComponent
 
 
 @Module

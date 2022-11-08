@@ -1,5 +1,6 @@
 package com.khvatid.ashuluk.data.repositories
 
+import com.google.firebase.ktx.Firebase
 import com.khvatid.ashuluk.data.storage.KanbanStorage
 import com.khvatid.ashuluk.data.storage.models.TaskModel
 import com.khvatid.ashuluk.domain.entities.TaskEntity
@@ -70,9 +71,9 @@ class KanbanRepositoryImp(private val storage: KanbanStorage) : KanbanRepository
         return TaskEntity(
             id = this.id,
             status = when (this.status) {
-                1 -> TaskStatus.NotStarted
-                2 -> TaskStatus.InProgress
-                3 -> TaskStatus.Completed
+                0 -> TaskStatus.NotStarted
+                1 -> TaskStatus.InProgress
+                2 -> TaskStatus.Completed
                 else -> TaskStatus.NotStarted
             },
             title = this.title,

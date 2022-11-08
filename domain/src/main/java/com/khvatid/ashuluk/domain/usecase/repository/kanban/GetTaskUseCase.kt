@@ -5,7 +5,7 @@ import com.khvatid.ashuluk.domain.repository.KanbanRepository
 
 class GetTaskUseCase(private val repository: KanbanRepository) {
 
-    suspend fun execute(taskId: String, onError: (Throwable?) -> Unit, onSuccess: (TaskEntity) -> Unit) {
+    suspend fun execute(taskId: String, onError: (Throwable) -> Unit, onSuccess: (TaskEntity) -> Unit) {
         repository.getTask(taskId = taskId, onError = onError, onSuccess = onSuccess)
     }
 }

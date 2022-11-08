@@ -9,5 +9,7 @@ object UiRoutes {
     const val SETTINGS = "settings_screen"
     const val KANBAN = "kanban_screen"
     const val TASK = "task_screen"
-    const val TASK_EDIT = "$TASK/{taskId}"
+    const val DEFAULT_TASK_ID = "DEF"
+    const val TASK_EDIT = "$TASK/$DEFAULT_TASK_ID"
+
 }

@@ -9,7 +9,7 @@ data class TaskEntity(
 )
 
 enum class TaskStatus(val value: Int) {
-    NotStarted(value = 1),
-    InProgress(value = 2),
-    Completed(value = 3);
+    NotStarted(value = 0),
+    InProgress(value = 1),
+    Completed(value = 2);
 }
