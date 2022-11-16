@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.khvatid.ashuluk.domain.entities.TaskEntity
+import com.khvatid.ashuluk.domain.entities.TaskStatus
 import com.khvatid.ashuluk.domain.usecase.repository.kanban.AddTaskListenerUseCase
 import com.khvatid.ashuluk.domain.usecase.repository.kanban.RemoveTaskListenerUseCase
 import com.khvatid.ashuluk.domain.usecase.repository.kanban.UpdateTaskUseCase
@@ -54,6 +55,14 @@ class KanbanViewModel @Inject constructor(
 
     fun onChangeSelectTab(value: Int) {
         uiState.value = uiState.value.copy(selectedTab = value)
+    }
+
+    fun changeTaskStatus(task: TaskEntity) {
+        viewModelScope.launch {
+            updateTaskUseCase.execute(
+                task.copy(status = TaskStatus.changeStatus(task.status)),
+                onResult = {})
+        }
     }
 
     private fun onDocumentEvent(wasDocumentDeleted: Boolean, task: TaskEntity) {

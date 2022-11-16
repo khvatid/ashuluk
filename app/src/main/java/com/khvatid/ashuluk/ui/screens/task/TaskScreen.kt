@@ -1,17 +1,14 @@
 package com.khvatid.ashuluk.ui.screens.task
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -24,16 +21,29 @@ fun TaskScreen(viewModel: TaskViewModel = hiltViewModel(), taskId: String, popBa
         viewModel.init(taskId)
     }
 
-    Column(modifier = Modifier.fillMaxSize()) {
-        TextField(value = uiState.taskEntity.title, onValueChange = viewModel::onTitleChange)
-
-        BasicTextField(value = uiState.taskEntity.page, onValueChange = viewModel::onPageChange)
-
-        Row() {
-            Button(onClick = { viewModel.onDoneClick(popBack) }) {
-                Text(text = "Done")
+    Scaffold(
+        topBar = {},
+        bottomBar = {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                TextButton(onClick = { viewModel.onDoneClick(popBack) }) {
+                    Text(text = "Done")
+                }
+            }
+        },
+        content = {
+            Column(modifier = Modifier.padding(it)) {
+                BasicTextField(
+                    value = uiState.taskEntity.title,
+                    onValueChange = viewModel::onTitleChange,
+                    textStyle = LocalTextStyle.current.copy(
+                        fontSize = 24.sp
+                    )
+                )
             }
         }
-    }
-
+    )
 }

@@ -1,6 +1,7 @@
 package com.khvatid.ashuluk.ui.app
 
 import android.content.res.Resources
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -22,7 +23,7 @@ import com.khvatid.ashuluk.ui.navigation.ashulukNavGraph
 import com.khvatid.ashuluk.ui.theme.AshulukTheme
 import kotlinx.coroutines.CoroutineScope
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @Composable
 fun App(viewModel: AppViewModel) {
     AshulukTheme {

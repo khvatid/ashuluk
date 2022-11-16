@@ -12,4 +12,13 @@ enum class TaskStatus(val value: Int) {
     NotStarted(value = 0),
     InProgress(value = 1),
     Completed(value = 2);
+
+    companion object {
+        fun changeStatus(taskStatus: TaskStatus): TaskStatus =
+            when (taskStatus) {
+                NotStarted -> InProgress
+                InProgress -> Completed
+                Completed -> NotStarted
+            }
+    }
 }
